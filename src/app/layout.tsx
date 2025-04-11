@@ -1,11 +1,6 @@
-import { GTProvider } from 'gt-next';
-import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 
-import { ThemeProvider } from '@mui/material/styles';
-import theme from '@/styles/theme';
-
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Providers from '@/app/providers';
 
 import './globals.css';
 
@@ -19,13 +14,6 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-export const metadata: Metadata = {
-  title: 'Simple Blog',
-  description: 'A simple app for Blogging',
-};
-
-const queryClient = new QueryClient();
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -33,15 +21,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <QueryClientProvider client={queryClient}>
-        <GTProvider>
-          <ThemeProvider theme={theme}>
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <Providers>
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+          <div className='w-screen h-screen'>
+            <main>
               {children}
-            </body>
-          </ThemeProvider>
-        </GTProvider>
-      </QueryClientProvider>
+            </main>
+          </div>
+        </body>
+      </Providers>
     </html>
   );
 }

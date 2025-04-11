@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
 
 const baseURL = 'https://67f908e8094de2fe6ea034b8.mockapi.io/api/';
@@ -34,8 +34,8 @@ export interface ApiResponse<T> {
 export const ServerAPI = {
   get: async <T>(url: string, config?: AxiosRequestConfig): Promise<T> => {
     try {
-      const response: AxiosResponse<ApiResponse<T>> = await instance.get<ApiResponse<T>>(url, config);
-      return response.data.data;
+      const response = await instance.get<T>(url, config);
+      return response.data;
     } catch (error) {
       return handleAxiosError(error as AxiosError);
     }
@@ -43,8 +43,8 @@ export const ServerAPI = {
 
   post: async <T, U>(url: string, data?: U, config?: AxiosRequestConfig): Promise<T> => {
     try {
-      const response: AxiosResponse<ApiResponse<T>> = await instance.post<ApiResponse<T>>(url, data, config);
-      return response.data.data;
+      const response = await instance.post<T>(url, data, config);
+      return response.data;
     } catch (error) {
       return handleAxiosError(error as AxiosError);
     }
@@ -52,8 +52,8 @@ export const ServerAPI = {
 
   put: async <T, U>(url: string, data?: U, config?: AxiosRequestConfig): Promise<T> => {
     try {
-      const response: AxiosResponse<ApiResponse<T>> = await instance.put<ApiResponse<T>>(url, data, config);
-      return response.data.data;
+      const response = await instance.put<T>(url, data, config);
+      return response.data;
     } catch (error) {
       return handleAxiosError(error as AxiosError);
     }
@@ -61,8 +61,8 @@ export const ServerAPI = {
 
   patch: async <T, U>(url: string, data?: U, config?: AxiosRequestConfig): Promise<T> => {
     try {
-      const response: AxiosResponse<ApiResponse<T>> = await instance.patch<ApiResponse<T>>(url, data, config);
-      return response.data.data;
+      const response = await instance.patch<T>(url, data, config);
+      return response.data;
     } catch (error) {
       return handleAxiosError(error as AxiosError);
     }
@@ -70,8 +70,8 @@ export const ServerAPI = {
 
   delete: async <T>(url: string, config?: AxiosRequestConfig): Promise<T> => {
     try {
-      const response: AxiosResponse<ApiResponse<T>> = await instance.delete<ApiResponse<T>>(url, config);
-      return response.data.data;
+      const response = await instance.delete<T>(url, config);
+      return response.data;
     } catch (error) {
       return handleAxiosError(error as AxiosError);
     }
