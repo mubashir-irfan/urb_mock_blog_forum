@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# E-commerce Storefront
+
+This project is a simple blog app built with NextJS, React Query, Material UI.
+
+## Features
+
+* **Posts Listing:** Displays a list of posts from a mock backend free tier. Each list item shows post title, author, image, summary and a "Read more" button.
+* **Post Details**: Displays post cover image, summary, title, full body and author details.
+* **Create Post Form**: Form for creating simple posts. Since free tier of mock backend does not allow creating data, the post is not actually created. But form management, API invocation and query invalidation is demonstrated in the codebase.
+
+
+## Challenges faced
+The assignment required using React Query as well as Server Side Rendering. RQ is primarliy a client side library. Using it with SSR required advanced usage. This has been achieved by prefetching posts query on server when rendering Blog listing as a server side component. The preset query client is then deyhdrated and provisioned to frontend where it can access the prefetched posts without making a new call. Hence, SSR with React Query.
+
+Free Backend Tier does not allow creating posts.
+
+## Codebase
+
+The codebase has been designed feature-wise. The app routing directory only contains the routing code. The rendering is encapsulated in feature-specific components in src/components. This makes the components routing-agnostic and portable.
+
+With feature-specific structure, the codebase can scale seamlessly and different teams, responsible for different verticals, can work in parallel without conflicts.
+
+## Technologies Used
+
+* **Next.js:** React framework for server-side rendering and static site generation.
+* **React:** JavaScript library for building user interfaces.
+* **TypeScript:** Static type checker for JavaScript.
+* **Tailwind CSS:** Utility-first CSS framework.
+* **Lucide React:** Icon library.
+* **React Query Toast:** Server-state Aware API communication.
+* **Axios:** HTTP client for making API requests.
 
 ## Getting Started
 
-First, run the development server:
+1.  **Clone the repository:**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+    ```bash
+    git clone https://github.com/mubashir-irfan/urb_mock_blog_forum
+    ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2.  **Navigate to the project directory:**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+    ```bash
+    cd urb_mock_blog_forum
+    ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3.  **Install dependencies:**
 
-## Learn More
+    ```bash
+    npm install
+    # or
+    yarn install
+    # or
+    pnpm install
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+4.  **Run the development server:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    # or
+    pnpm dev
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+5.  **Open your browser and visit `http://localhost:3000`.**
 
-## Deploy on Vercel
+## Building for Production
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1.  **Build the application:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    ```bash
+    npm run build
+    # or
+    yarn build
+    # or
+    pnpm build
+    ```
+
+2.  **Start the production server:**
+
+    ```bash
+    npm run start
+    # or
+    yarn start
+    # or
+    pnpm start
+    ```
