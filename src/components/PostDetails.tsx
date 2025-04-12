@@ -26,7 +26,7 @@ const PostDetails = () => {
   }
 
   if (isError) {
-    return <ErrorPage />
+    return <ErrorPage message='Free Backend Tier does not allow creating data :)' />
   }
 
   if (!post) {

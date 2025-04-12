@@ -1,5 +1,4 @@
 import { ServerAPI } from '@/services';
-import { getCurrentInMemoryPosts, createCurrentInMemoryPost } from './helper';
 
 import { Post } from '@/types';
 import { NextRequest, NextResponse } from 'next/server';
@@ -7,8 +6,7 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function GET() {
   try {
     const posts: Post[] = await ServerAPI.get('posts')
-    const inMemoryPosts = getCurrentInMemoryPosts();
-    return new Response(JSON.stringify([...inMemoryPosts, ...posts]), {
+    return new Response(JSON.stringify(posts), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
@@ -43,10 +41,6 @@ export async function POST(req: NextRequest) {
       },
       coverImageUrl: 'https://picsum.photos/id/1043/800/400'
     }
-
-    await createCurrentInMemoryPost(newPost)
-
-    console.log('mock post', { inMemPosts: getCurrentInMemoryPosts() })
 
     return NextResponse.json(newPost, { status: 201 });
   } catch (error) {

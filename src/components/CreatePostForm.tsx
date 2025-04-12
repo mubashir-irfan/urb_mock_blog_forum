@@ -17,6 +17,7 @@ import {
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(4),
@@ -42,13 +43,17 @@ const CreatePostPage: React.FC = () => {
   const queryClient = useQueryClient();
 
   const { mutate: createPost, isPending } = usePost('/api/posts', () => {
-    console.log('Post created with success')
+    toast.success(
+      'Your post has been created. But we can not render it because Free Backend does not allow creation :)', {
+      duration: 3000
+    });
     queryClient.invalidateQueries({
       queryKey: ['posts']
     })
     router.push('/')
   }, () => {
     console.log('Failed to create post')
+    toast.error('Failed to create post')
   })
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -65,7 +70,6 @@ const CreatePostPage: React.FC = () => {
 
     // If no errors, submit the form
     if (!titleErrorMsg && !summaryErrorMsg && !contentErrorMsg) {
-      console.log({ title, summary, content });
       createPost({
         title,
         summary,

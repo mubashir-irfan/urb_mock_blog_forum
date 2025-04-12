@@ -1,10 +1,14 @@
 export const alphanumeric = (value: string) => {
-  if (!value) {
-    return 'This field is required.'; // Consistent error message for required
+  if (!value?.trim()) {
+    return 'This field is required.';
   }
-  const alphanumericRegex = /^[a-zA-Z0-9]+$/;
-  if (!alphanumericRegex.test(value)) {
-    return 'Must contain only letters and numbers.';
+
+  const trimmed = value.trim();
+  const alphanumericRegex = /^[a-zA-Z0-9 ]+$/;
+
+  if (!alphanumericRegex.test(trimmed)) {
+    return 'Must contain only letters, numbers, and spaces (no leading or trailing spaces).';
   }
+
   return undefined;
 };
