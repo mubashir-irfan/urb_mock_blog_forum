@@ -1,9 +1,11 @@
 'use client';
 
+import { usePost } from '@/hooks/useAPIHooks';
 import { Button, TextArea, TextInput } from '@/shared/components';
 import { alphanumeric } from '@/utils/validators';
 import {
   Box,
+  CircularProgress,
   Container,
   Divider,
   FormControl,
@@ -12,6 +14,7 @@ import {
   Typography,
   styled,
 } from '@mui/material';
+import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
@@ -36,6 +39,17 @@ const CreatePostPage: React.FC = () => {
   const [summaryError, setSummaryError] = useState<string | undefined>(undefined);
   const [contentError, setContentError] = useState<string | undefined>(undefined);
   const router = useRouter();
+  const queryClient = useQueryClient();
+
+  const { mutate: createPost, isPending } = usePost('/api/posts', () => {
+    console.log('Post created with success')
+    queryClient.invalidateQueries({
+      queryKey: ['posts']
+    })
+    router.push('/')
+  }, () => {
+    console.log('Failed to create post')
+  })
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -52,7 +66,11 @@ const CreatePostPage: React.FC = () => {
     // If no errors, submit the form
     if (!titleErrorMsg && !summaryErrorMsg && !contentErrorMsg) {
       console.log({ title, summary, content });
-      // router.push('/'); // Uncomment when ready
+      createPost({
+        title,
+        summary,
+        content
+      })
     }
   };
 
@@ -95,7 +113,9 @@ const CreatePostPage: React.FC = () => {
           </FormControl>
 
           <Box display="flex" justifyContent="flex-end">
-            <Button type="submit">Create Post</Button>
+            {
+              !isPending ? <Button type="submit">Create Post</Button> : <CircularProgress />
+            }
           </Box>
         </StyledForm>
       </StyledPaper>

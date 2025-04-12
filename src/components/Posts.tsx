@@ -8,6 +8,7 @@ import { List, Typography } from '@mui/material';
 import PostListItem from "./PostListItem";
 
 export default function Posts() {
+  // if post creation had happened on same page/in a modal, we would use React Query's query invalidation/refetch to update the posts list
   const { data: posts, isLoading, isError } = useGet<Post[]>('api/posts', 'posts',)
 
   if (isLoading) {

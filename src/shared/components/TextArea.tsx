@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { styled, TextareaAutosize } from '@mui/material';
+import React from 'react';
 
 interface TextAreaProps {
   errorMessage?: string;

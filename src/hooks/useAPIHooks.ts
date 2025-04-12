@@ -42,7 +42,7 @@ export const usePost = <T, D>(
   onError?: (error: AxiosError<APIError>, variables: D) => void,
 ) => {
   return useMutation({
-    mutationFn: async (data?: RequestPayload<D>): Promise<T> => await ServerAPI.post(url, data),
+    mutationFn: async (data?: RequestPayload<D>): Promise<T> => await axios.post(url, data),
     onSuccess,
     onError,
   });
