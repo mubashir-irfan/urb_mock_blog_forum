@@ -4,7 +4,10 @@ export type Post = {
   createdAt: string;  // ISO date string
   updatedAt: string;  // ISO date string
   title: string;
-  author: string;
+  author: {
+    id: number,
+    name: string;
+  };
   summary: string;
   content: string;
   coverImageUrl: string;

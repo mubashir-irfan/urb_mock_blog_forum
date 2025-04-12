@@ -12,6 +12,7 @@ import {
   Container,
   Typography
 } from '@mui/material';
+import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 
 const PostDetails = () => {
@@ -68,7 +69,7 @@ const PostDetails = () => {
             color="text.secondary"
             sx={{ mb: 3, fontStyle: 'italic' }}
           >
-            By {post.author} · {new Date(post.createdAt).toLocaleDateString()}
+            By <Link href={`/authors/${post.author.id}`}>{post.author.name}</Link> · {new Date(post.createdAt).toLocaleDateString()}
           </Typography>
 
           <Typography

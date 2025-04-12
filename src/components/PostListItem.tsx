@@ -52,6 +52,15 @@ const PostListItem: React.FC<PostListItemProps> = ({ post }) => {
           {post.title}
         </Typography>
 
+        {/* Author name */}
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{ mb: 1 }}
+        >
+          By {post.author?.name}
+        </Typography>
+
         <Typography
           variant="body2"
           color="text.secondary"
