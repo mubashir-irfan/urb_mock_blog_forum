@@ -4,7 +4,7 @@ import {
   UseQueryResult,
   UseQueryOptions,
 } from '@tanstack/react-query';
-import { AxiosError, AxiosHeaderValue, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosHeaderValue, AxiosResponse } from 'axios';
 import { APIError } from '@/types';
 import { QueryParams } from '@/types';
 import { ServerAPI } from '@/services';
@@ -21,7 +21,7 @@ export const useGet = <T>(
 ): UseQueryResult<T, AxiosError<APIError>> => {
   return useQuery<AxiosResponse, AxiosError<APIError>, T, [string, QueryParams?]>({
     queryKey: params ? [queryKey, params] : [queryKey],
-    queryFn: async () => await ServerAPI.get(url, params),
+    queryFn: async () => (await axios.get(url)).data,
     enabled: enabled,
     ...queryOptions,
   });

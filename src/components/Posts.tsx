@@ -8,7 +8,7 @@ import { List, Typography } from '@mui/material';
 import PostListItem from "./PostListItem";
 
 export default function Posts() {
-  const { data: posts, isLoading, isError } = useGet<Post[]>('posts', 'posts',)
+  const { data: posts, isLoading, isError } = useGet<Post[]>('api/posts', 'posts',)
 
   if (isLoading) {
     return <PostListSkeleton />

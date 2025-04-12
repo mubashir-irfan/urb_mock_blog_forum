@@ -1,8 +1,8 @@
 import { Posts } from '@/components';
 import { ServerAPI } from '@/services';
-import { getQueryClient } from './get-query-client';
+import { getQueryClient } from '@/app/get-query-client';
 
-export default async function Home() {
+export default async function PostsPage() {
 
   const queryClient = getQueryClient();
 
