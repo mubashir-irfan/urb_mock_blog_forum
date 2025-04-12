@@ -1,4 +1,6 @@
-# E-commerce Storefront
+# Application
+
+[Vercel Deployment](https://urb-mock-blog-forum.vercel.app/)
 
 This project is a simple blog app built with NextJS, React Query, Material UI.
 
